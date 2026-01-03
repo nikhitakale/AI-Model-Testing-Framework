@@ -4,13 +4,6 @@ Hey there! Welcome to a testing framework that actually speaks human. We're here
 
 ## Quick Demo
 
-See the framework in action:
-
-<!-- Replace this with your actual video link once uploaded -->
-[![Demo Video](https://img.shields.io/badge/▶️-Watch%20Demo-red?style=for-the-badge)](https://github.com/YOUR_USERNAME/YOUR_REPO/assets/demo.mp4)
-
-**Or check out this quick example:**
-
 ```bash
 # Run a quick LLM test
 python cli/main.py test-llm --prompt "What is AI?"
@@ -348,34 +341,3 @@ Contributions welcome! Please:
 ## 📝 License
 
 MIT License - see LICENSE file for details
-
-## 🙏 Acknowledgments
-
-Built with:
-- OpenAI API
-- Anthropic API
-- HuggingFace Transformers
-- pytest
-- matplotlib & seaborn
-
-## 📞 Support
-
-For issues and questions:
-- GitHub Issues: [your-repo]/issues
-- Documentation: [your-docs-url]
-- Email: support@example.com
-
-## 🗺️ Roadmap
-
-- [ ] Support for more LLM providers
-- [ ] Advanced hallucination detection
-- [ ] Automated test generation
-- [ ] CI/CD integration templates
-- [ ] Real-time monitoring dashboard
-- [ ] A/B testing capabilities
-- [ ] Model drift detection
-- [ ] Adversarial testing
-
----
-
-**Stand out as an AI QA professional with comprehensive, automated AI model testing!** 🚀
