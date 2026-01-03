@@ -1,68 +1,88 @@
 # AI Model Testing Framework
 
-A comprehensive, professional-grade testing framework for AI/ML models with focus on quality assurance, bias detection, and performance benchmarking.
+Hey there! Welcome to a testing framework that actually speaks human. We're here to help you test your AI models without all the corporate jargon and robotic messages.
 
-## 🎯 Features
+## Quick Demo
 
-### LLM Testing
-- **Inference Testing**: Validate model outputs for accuracy and relevance
-- **Prompt Consistency**: Measure response consistency across multiple runs
-- **Hallucination Detection**: Compare outputs against ground truth
-- **Multi-Provider Support**: OpenAI, Anthropic, and HuggingFace models
+See the framework in action:
 
-### Bias & Fairness
-- **Demographic Bias Detection**: Test for biases across demographic groups
-- **Sentiment Bias Analysis**: Measure sentiment variation across protected attributes
-- **Representation Bias**: Analyze representation fairness in model outputs
-- **Automated Bias Scoring**: Quantitative bias metrics
+<!-- Replace this with your actual video link once uploaded -->
+[![Demo Video](https://img.shields.io/badge/▶️-Watch%20Demo-red?style=for-the-badge)](https://github.com/YOUR_USERNAME/YOUR_REPO/assets/demo.mp4)
 
-### Performance Testing
-- **Load Testing**: Concurrent request handling and throughput measurement
-- **Latency Analysis**: P50, P95, P99 percentile tracking
-- **Stress Testing**: Progressive load increase testing
-- **Resource Monitoring**: CPU and memory usage tracking
-
-### Evaluation Metrics
-- **BLEU & ROUGE Scores**: Standard NLP evaluation metrics
-- **F1 Score**: Token-level precision and recall
-- **Semantic Similarity**: Context-aware similarity measures
-- **Model Comparison**: Side-by-side model evaluation
-
-### Reporting
-- **HTML Reports**: Professional, interactive test reports
-- **Performance Charts**: Visual latency and throughput analysis
-- **JSON Export**: Machine-readable test results
-- **Dashboard Metrics**: Real-time test statistics
-
-## 📦 Installation
+**Or check out this quick example:**
 
 ```bash
-# Clone the repository
+# Run a quick LLM test
+python cli/main.py test-llm --prompt "What is AI?"
+
+# Output:
+# Hmm, let me think about this...
+# Here's what I found:
+# Status: Looking good!
+# Got a nice detailed response! Here's a preview: Artificial Intelligence...
+```
+
+## What Can It Do?
+
+### LLM Testing
+- **Inference Testing**: See if your model actually knows what it's talking about
+- **Prompt Consistency**: Check if it gives the same answer twice (spoiler: sometimes it doesn't!)
+- **Hallucination Detection**: Catch your AI when it's making stuff up
+- **Multi-Provider Support**: Works with OpenAI, Anthropic, and HuggingFace - we're not picky!
+
+### Bias & Fairness (Because AI Should Be Fair!)
+- **Demographic Bias Detection**: Make sure your AI treats everyone equally
+- **Sentiment Bias Analysis**: Check if it's nicer to some groups than others
+- **Representation Bias**: See if everyone gets a fair mention
+- **Automated Bias Scoring**: Numbers that tell you if something's off
+
+### Performance Testing (How Fast Can It Go?)
+- **Load Testing**: See if it can handle a crowd
+- **Latency Analysis**: Measure how long you'll be waiting (with fancy percentiles!)
+- **Stress Testing**: Push it 'til it breaks (responsibly)
+- **Resource Monitoring**: Watch those CPUs sweat
+
+### Evaluation Metrics (The Nerdy Stuff)
+- **BLEU & ROUGE Scores**: Industry standard ways to score text
+- **F1 Score**: Math that tells you how good the match is
+- **Semantic Similarity**: Does it actually mean the same thing?
+- **Model Comparison**: Battle of the AIs - which one wins?
+
+### Reporting (Make It Pretty!)
+- **HTML Reports**: Beautiful reports you can actually show your boss
+- **Performance Charts**: Graphs that make sense (finally!)
+- **JSON Export**: For when you need to get programmatic
+- **Dashboard Metrics**: Real-time stats to watch your tests run
+
+## Getting Started
+
+It's super easy, promise!
+
+```bash
+# Grab the code
 git clone <your-repo-url>
 cd ai-model-testing-framework
 
-# Create virtual environment
+# Set up your Python environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install everything you need
 pip install -r requirements.txt
 
-# Install in development mode
+# Install the framework
 pip install -e .
-```
+```Let's Go!
 
-## 🚀 Quick Start
+### 1. Set Up Your API Keys
 
-### 1. Configure API Keys
-
-Create a `.env` file:
+First things first - we need your API keys:
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` and add your API keys:
+Then pop in your keys:
 
 ```env
 OPENAI_API_KEY=your_key_here
@@ -70,27 +90,31 @@ ANTHROPIC_API_KEY=your_key_here
 HUGGINGFACE_TOKEN=your_token_here
 ```
 
-### 2. Run Example Tests
+### 2. Take It for a Spin
+
+The easiest way to get started:
 
 ```bash
 python examples/run_tests.py
 ```
 
-### 3. Use CLI
+### 3. Or Use the CLI (If You're Feeling Fancy)
 
 ```bash
-# Test LLM inference
-aitest test-llm --model gpt-3.5-turbo --prompt "What is AI?"
+# Ask the AI something
+python cli/main.py test-llm --prompt "What is AI?"
 
-# Run performance tests
-aitest test-performance --model gpt-3.5-turbo --num-requests 50
+# See how fast it goes
+python cli/main.py test-performance --num-requests 50
 
-# Test for bias
-aitest test-bias --model gpt-3.5-turbo
+# Check for bias
+python cli/main.py test-bias
 
-# Generate report
-aitest generate-report --output ./reports
+# Make a pretty report
+python cli/main.py generate-report
 
+# See what else you can do
+python cli/main.py
 # List available tests
 aitest list-tests
 ```

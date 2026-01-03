@@ -43,10 +43,16 @@ class LLMTester(BaseModelTester):
             
             execution_time = (time.time() - start_time) * 1000
             
+            # Make the message friendlier based on response quality
+            if len(output) > 50:
+                msg = f"Got a nice detailed response! Here's a preview: {output[:80]}..."
+            else:
+                msg = f"Quick response: {output}"
+            
             result = TestResult(
                 test_name="inference_test",
                 status=TestStatus.PASSED if output else TestStatus.FAILED,
-                message=f"Generated response: {output[:100]}...",
+                message=msg,
                 execution_time_ms=execution_time,
                 metadata={"prompt": prompt, "response": output}
             )
@@ -87,11 +93,19 @@ class LLMTester(BaseModelTester):
             
             avg_latency = sum(latencies) / len(latencies)
             
+            # Add personality to the message
+            if avg_latency < 200:
+                perf_msg = f"Wow, that's fast! Average: {avg_latency:.2f}ms"
+            elif avg_latency < 500:
+                perf_msg = f"Pretty solid performance at {avg_latency:.2f}ms"
+            else:
+                perf_msg = f"A bit slow at {avg_latency:.2f}ms - might want to check that"
+            
             result = TestResult(
                 test_name="performance_test",
                 status=TestStatus.PASSED,
                 score=avg_latency,
-                message=f"Average latency: {avg_latency:.2f}ms",
+                message=perf_msg,
                 metadata={
                     "latencies": latencies,
                     "min": min(latencies),
@@ -135,11 +149,19 @@ class LLMTester(BaseModelTester):
             unique_responses = len(set(responses))
             consistency_score = 1.0 - (unique_responses - 1) / num_runs
             
+            # Make it conversational
+            if consistency_score >= 0.9:
+                msg = f"Super consistent! Got basically the same answer every time (score: {consistency_score:.2f})"
+            elif consistency_score >= 0.6:
+                msg = f"Reasonably consistent with score of {consistency_score:.2f}"
+            else:
+                msg = f"Hmm, answers are all over the place (consistency: {consistency_score:.2f})"
+            
             result = TestResult(
                 test_name="prompt_consistency_test",
                 status=TestStatus.PASSED,
                 score=consistency_score,
-                message=f"Consistency score: {consistency_score:.2f}",
+                message=msg,
                 metadata={
                     "prompt": prompt,
                     "num_unique_responses": unique_responses,
@@ -176,11 +198,19 @@ class LLMTester(BaseModelTester):
             # Simple similarity check (in production, use more sophisticated methods)
             similarity = self._calculate_similarity(output, ground_truth)
             
+            # Human-friendly messages
+            if similarity > 0.8:
+                msg = f"Looks accurate! {similarity:.0%} match with the facts"
+            elif similarity > 0.5:
+                msg = f"Mostly correct, about {similarity:.0%} accurate"
+            else:
+                msg = f"Uh oh, only {similarity:.0%} accurate - might be making stuff up!"
+            
             result = TestResult(
                 test_name="hallucination_detection_test",
                 status=TestStatus.PASSED if similarity > 0.5 else TestStatus.FAILED,
                 score=similarity,
-                message=f"Similarity to ground truth: {similarity:.2f}",
+                message=msg,
                 metadata={
                     "prompt": prompt,
                     "ground_truth": ground_truth,

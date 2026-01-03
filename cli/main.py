@@ -21,7 +21,7 @@ load_dotenv()
 
 @click.group()
 def cli():
-    """AI Model Testing Framework - Professional QA for AI Systems"""
+    """Hey! Let's test some AI models together!"""
     pass
 
 
@@ -34,15 +34,17 @@ def test_llm(model, provider, prompt):
     api_key = os.getenv(f"{provider.upper()}_API_KEY")
     
     if not api_key:
-        click.echo(f"Error: {provider.upper()}_API_KEY not set", err=True)
+        click.echo(f"\nOops! Looks like you haven't set up your {provider.upper()}_API_KEY yet.", err=True)
+        click.echo(f"Quick fix: Add it to your .env file and we'll be good to go!", err=True)
         return
     
+    click.echo(f"\nHmm, let me think about this...")
     tester = LLMTester(model_name=model, provider=provider, api_key=api_key)
     result = tester.test_inference(prompt)
     
-    click.echo(f"\nTest: {result.test_name}")
-    click.echo(f"Status: {result.status.value}")
-    click.echo(f"Message: {result.message}")
+    click.echo(f"\nHere's what I found:")
+    click.echo(f"Status: {'Looking good!' if result.status.value == 'passed' else result.status.value}")
+    click.echo(f"{result.message}")
     
     if result.metadata and 'response' in result.metadata:
         click.echo(f"\nResponse:\n{result.metadata['response']}")
@@ -57,23 +59,25 @@ def test_performance(model, provider, num_requests):
     api_key = os.getenv(f"{provider.upper()}_API_KEY")
     
     if not api_key:
-        click.echo(f"Error: {provider.upper()}_API_KEY not set", err=True)
+        click.echo(f"\nOops! Looks like you haven't set up your {provider.upper()}_API_KEY yet.", err=True)
+        click.echo(f"Quick fix: Add it to your .env file and we'll be good to go!", err=True)
         return
     
-    click.echo(f"Running performance test with {num_requests} requests...")
+    click.echo(f"\nAlright, let's see how fast this model can go!")
+    click.echo(f"Running {num_requests} requests... hang tight!")
     
     tester = LLMTester(model_name=model, provider=provider, api_key=api_key)
     prompts = ["What is AI?", "Explain machine learning.", "What is deep learning?"]
     
     result = tester.test_performance(prompts, num_requests=num_requests)
     
-    click.echo(f"\nPerformance Test Results:")
-    click.echo(f"Status: {result.status.value}")
-    click.echo(f"Average Latency: {result.score:.2f}ms")
+    click.echo(f"\nHere's how it performed:")
+    click.echo(f"{'Not bad!' if result.status.value == 'passed' else result.status.value}")
+    click.echo(f"Average response time: {result.score:.2f}ms")
     
     if result.metadata:
-        click.echo(f"Min Latency: {result.metadata['min']:.2f}ms")
-        click.echo(f"Max Latency: {result.metadata['max']:.2f}ms")
+        click.echo(f"Fastest: {result.metadata['min']:.2f}ms")
+        click.echo(f"Slowest: {result.metadata['max']:.2f}ms")
 
 
 @cli.command()
@@ -84,10 +88,11 @@ def test_bias(model, provider):
     api_key = os.getenv(f"{provider.upper()}_API_KEY")
     
     if not api_key:
-        click.echo(f"Error: {provider.upper()}_API_KEY not set", err=True)
+        click.echo(f"\nOops! Looks like you haven't set up your {provider.upper()}_API_KEY yet.", err=True)
+        click.echo(f"Quick fix: Add it to your .env file and we'll be good to go!", err=True)
         return
     
-    click.echo("Running bias detection tests...")
+    click.echo("\nTime to play detective and check for any hidden biases...")
     
     llm_tester = LLMTester(model_name=model, provider=provider, api_key=api_key)
     bias_detector = BiasDetector(llm_tester)
@@ -101,17 +106,21 @@ def test_bias(model, provider):
         num_samples=3
     )
     
-    click.echo(f"\nBias Detection Results:")
-    click.echo(f"Status: {result.status.value}")
-    click.echo(f"Bias Score: {result.score:.3f} (lower is better)")
-    click.echo(f"Message: {result.message}")
+    click.echo(f"\nAlright, here's what I discovered:")
+    if result.score < 0.2:
+        click.echo(f"Great news! The model seems pretty fair (bias score: {result.score:.3f})")
+    elif result.score < 0.4:
+        click.echo(f"Hmm, found some bias worth watching (score: {result.score:.3f})")
+    else:
+        click.echo(f"Yikes! Detected significant bias (score: {result.score:.3f})")
+    click.echo(f"{result.message}")
 
 
 @cli.command()
 @click.option('--output', default='./reports', help='Output directory for reports')
 def generate_report(output):
-    """Generate comprehensive test report"""
-    click.echo(f"Generating report in {output}...")
+    """Generate a beautiful test report"""
+    click.echo(f"\nCreating a nice report for you in {output}...")
     
     # This is a placeholder - in real usage, you'd collect actual test results
     sample_results = [
@@ -123,20 +132,21 @@ def generate_report(output):
     generator = ReportGenerator(output_dir=output)
     report_path = generator.generate_html_report(sample_results, "AI Model Test Report")
     
-    click.echo(f"Report generated: {report_path}")
+    click.echo(f"\nTa-da! Your report is ready: {report_path}")
+    click.echo(f"Open it in your browser to see all the juicy details!")
 
 
 @cli.command()
 def list_tests():
-    """List available test types"""
-    click.echo("\nAvailable Test Types:")
-    click.echo("  • LLM Inference Testing")
-    click.echo("  • Performance & Load Testing")
-    click.echo("  • Bias & Fairness Detection")
-    click.echo("  • Prompt Consistency Testing")
-    click.echo("  • Hallucination Detection")
-    click.echo("  • Model Comparison")
-    click.echo("\nUse --help with any command for more details")
+    """See what cool tests you can run"""
+    click.echo("\nHere's what we can test together:")
+    click.echo("\n  • LLM Inference Testing - See how models respond")
+    click.echo("  • Performance & Load Testing - Check speed and capacity")
+    click.echo("  • Bias & Fairness Detection - Keep AI fair and balanced")
+    click.echo("  • Prompt Consistency Testing - Make sure answers stay consistent")
+    click.echo("  • Hallucination Detection - Catch when AI makes stuff up")
+    click.echo("  • Model Comparison - See which model wins")
+    click.echo("\nTip: Add --help to any command to learn more!")
 
 
 def main():
