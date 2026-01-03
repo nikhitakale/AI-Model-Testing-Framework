@@ -118,7 +118,7 @@ python cli/main.py
 aitest list-tests
 ```
 
-## 📚 Usage Examples
+## Usage Examples
 
 ### LLM Testing
 
@@ -243,7 +243,7 @@ chart_path = generator.generate_performance_chart(
 json_path = generator.export_json(data, "results.json")
 ```
 
-## 🧪 Running Tests
+## Running Tests
 
 ```bash
 # Run all tests
@@ -262,7 +262,7 @@ pytest -v
 pytest --html=reports/test_report.html
 ```
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 ai-model-testing-framework/
@@ -298,7 +298,7 @@ ai-model-testing-framework/
 └── README.md                    # This file
 ```
 
-## 🔧 Configuration
+## Configuration
 
 Configure testing via environment variables or `src/config.py`:
 
@@ -317,7 +317,7 @@ ENABLE_PERFORMANCE_TESTS = True
 ENABLE_BIAS_TESTS = True
 ```
 
-## 📈 Metrics & Scoring
+## Metrics & Scoring
 
 ### Bias Scores
 - **< 0.2**: Low bias (excellent)
@@ -334,7 +334,7 @@ ENABLE_BIAS_TESTS = True
 - **ROUGE**: 0-1 (higher is better)
 - **F1**: 0-1 (higher is better)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome! Please:
 
@@ -344,6 +344,6 @@ Contributions welcome! Please:
 4. Ensure all tests pass
 5. Submit a pull request
 
-## 📝 License
+## License
 
 MIT License - see LICENSE file for details
