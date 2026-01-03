@@ -15,6 +15,12 @@ python cli/main.py test-llm --prompt "What is AI?"
 # Got a nice detailed response! Here's a preview: Artificial Intelligence...
 ```
 
+## Architecture
+
+See how everything connects:
+
+**[View Interactive Framework Diagram](https://app.eraser.io/workspace/FgiLvwGJGgoeemqweRBf)**
+
 ## What Can It Do?
 
 ### LLM Testing
